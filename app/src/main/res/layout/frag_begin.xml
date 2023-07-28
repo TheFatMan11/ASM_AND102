@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quản lý công việc"
+        android:textColor="#1B9FBC"
+        android:textStyle="bold"
+        android:textSize="40dp"
+        />
+    <ImageView
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/logo"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Make by"
+        android:textColor="#69BFD2"
+        android:textStyle="bold"
+        android:textSize="24dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quàng Ngọc Thủy"
+        android:textColor="#3CC4E1"
+        android:textStyle="bold"
+        android:textSize="40dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PH35609"
+        android:textColor="#1B9FBC"
+        android:textStyle="bold"
+        android:textSize="32dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AND102-MD18312"
+        android:textColor="#1B9FBC"
+        android:textStyle="bold"
+        android:textSize="32dp"
+        />
+
+</LinearLayout>

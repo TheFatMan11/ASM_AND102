@@ -22,7 +22,6 @@ public class DAO_user {
 
     public long AddRow(DTO_user dto_user) {
         ContentValues values = new ContentValues();
-        values.put("id", dto_user.getId());
         values.put("username", dto_user.getUsername());
         values.put("email", dto_user.getEmail());
         values.put("password", dto_user.getPassword());
