@@ -64,7 +64,6 @@ public class Frag_dangKy extends Fragment {
             public void onClick(View v) {
                 setDangKy();
 
-                Toast.makeText(getContext(), ""+email.getText().toString()+"-----"+dto_user.getEmail(), Toast.LENGTH_SHORT).show();
 
             }
         });

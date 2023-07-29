@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.thuydev.thuyqnph35609_ass.DAO.DAO_user;
 import com.thuydev.thuyqnph35609_ass.DTO.DTO_user;
+import com.thuydev.thuyqnph35609_ass.MainActivity;
 import com.thuydev.thuyqnph35609_ass.R;
 
 import java.util.List;
@@ -29,6 +30,7 @@ public class Frag_dangnhap extends Fragment {
     List<DTO_user> list;
     DAO_user daoUser;
     DTO_user dto_user;
+    MainActivity activity ;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class Frag_dangnhap extends Fragment {
         quenMK= view.findViewById(R.id.tv_quenmatkhau);
         dangNhap = view.findViewById(R.id.btn_dangnhap);
         daoUser = new DAO_user(getContext());
+        activity= (MainActivity) getContext();
         list = daoUser.getAll();
 
 
@@ -78,7 +81,7 @@ public class Frag_dangnhap extends Fragment {
         quenMK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Frag_quen_pass_xacthuc frag_quen_pass_xacthuc = new Frag_quen_pass_xacthuc();
+                Frag_quen_pass_xacthuc frag_quen_pass_xacthuc = activity.truyenPassXT();
                 FragmentManager manager = getActivity().getSupportFragmentManager();
                 manager.beginTransaction().replace(R.id.frag_,frag_quen_pass_xacthuc).commit();
             }
