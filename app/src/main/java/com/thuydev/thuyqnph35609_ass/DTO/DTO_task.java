@@ -3,6 +3,7 @@ package com.thuydev.thuyqnph35609_ass.DTO;
 public class DTO_task {
     private int id ;
     private String name;
+    private String conten;
     private int status;
     private String start;
     private String end ;
@@ -11,13 +12,22 @@ public class DTO_task {
     public DTO_task() {
     }
 
-    public DTO_task(int id, String name, int status, String start, String end, int id_user) {
+    public DTO_task(int id, String name, String conten, int status, String start, String end, int id_user) {
         this.id = id;
         this.name = name;
+        this.conten = conten;
         this.status = status;
         this.start = start;
         this.end = end;
         this.id_user = id_user;
+    }
+
+    public String getConten() {
+        return conten;
+    }
+
+    public void setConten(String conten) {
+        this.conten = conten;
     }
 
     public int getId() {

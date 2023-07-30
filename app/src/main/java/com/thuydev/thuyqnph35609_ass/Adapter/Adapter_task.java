@@ -29,7 +29,7 @@ List<DTO_task> list;
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = ((Activity)context).getLayoutInflater();
-        View view = inflater.inflate(R.layout.item_task,parent,false);
+        View view = inflater.inflate(R.layout.item_list_cv,parent,false);
 
         return new ViewHolder(view);
     }
@@ -38,6 +38,14 @@ List<DTO_task> list;
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 holder.name.setText(list.get(position).getName());
 holder.status.setText(status(list.get(position).getStatus()));
+       holder.menu.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+
+           }
+       });
+
+
 
 holder.menu.setOnClickListener(new View.OnClickListener() {
     @Override
@@ -57,9 +65,10 @@ TextView name,status;
 ImageButton menu;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            name = itemView.findViewById(R.id.tv_name);
-            status = itemView.findViewById(R.id.tv_status);
-            menu = itemView.findViewById(R.id.ibtn_menu);
+            name = itemView.findViewById(R.id.tv_tencv);
+            status = itemView.findViewById(R.id.tv_trangthai);
+            menu = itemView.findViewById(R.id.ibtn_more);
+
         }
     }
     public String status(int st){

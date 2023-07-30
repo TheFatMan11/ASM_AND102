@@ -1,6 +1,8 @@
 package com.thuydev.thuyqnph35609_ass.DTO;
 
-public class DTO_user {
+import java.io.Serializable;
+
+public class DTO_user implements Serializable {
     private int id;
     private String username;
     private String email;
