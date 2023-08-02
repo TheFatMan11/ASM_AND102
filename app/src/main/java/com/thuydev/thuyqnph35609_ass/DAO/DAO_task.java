@@ -56,9 +56,9 @@ public class DAO_task {
         return db.update("tasks",values,"id=?",index);
     }
 
-    public List<DTO_task> getData(){
+    public List<DTO_task> getData(int id_user){
         List<DTO_task> list = new ArrayList<>();
-        Cursor c =db.rawQuery("select * from tasks",null);
+        Cursor c =db.rawQuery("select * from tasks where id_user = "+ id_user,null);
         if(c!=null&&c.getCount()>0){
             c.moveToFirst();
             do {

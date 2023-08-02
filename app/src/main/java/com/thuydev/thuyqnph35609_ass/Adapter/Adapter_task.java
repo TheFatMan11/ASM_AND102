@@ -53,13 +53,15 @@ public class Adapter_task extends RecyclerView.Adapter<Adapter_task.ViewHolder> 
     Calendar lich = Calendar.getInstance();
     int frag_status = 0;
     int ngay_check, thang_check, nam_check;
+    int idUser = 0;
 
 
-    public Adapter_task(Context context, List<DTO_task> list,int sta) {
+    public Adapter_task(Context context, List<DTO_task> list,int sta,int id_user) {
         this.context = context;
         this.list = list;
         listOld = list;
         frag_status = sta;
+        idUser=id_user;
 
     }
 
@@ -374,23 +376,23 @@ public class Adapter_task extends RecyclerView.Adapter<Adapter_task.ViewHolder> 
     public void checkFrag(int a){
         if(a==-1){
             list.clear();
-            list.addAll(frag_bixoa.loc(dao_task.getData()));
+            list.addAll(frag_bixoa.loc(dao_task.getData(idUser)));
             notifyDataSetChanged();
         }else if(a==0){
             list.clear();
-            list.addAll(frag_moi.loc(dao_task.getData()));
+            list.addAll(frag_moi.loc(dao_task.getData(idUser)));
             notifyDataSetChanged();
         }else if(a==1){
             list.clear();
-            list.addAll(frag_chuahoanthanh.loc(dao_task.getData()));
+            list.addAll(frag_chuahoanthanh.loc(dao_task.getData(idUser)));
             notifyDataSetChanged();
         }else if(a==2){
             list.clear();
-            list.addAll(frag_hoanthanh.loc(dao_task.getData()));
+            list.addAll(frag_hoanthanh.loc(dao_task.getData(idUser)));
             notifyDataSetChanged();
         }else {
             list.clear();
-            list.addAll(frag_all.loc(dao_task.getData()));
+            list.addAll(frag_all.loc(dao_task.getData(idUser)));
             notifyDataSetChanged();
         }
     }

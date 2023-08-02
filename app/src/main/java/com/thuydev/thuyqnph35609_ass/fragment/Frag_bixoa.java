@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.thuydev.thuyqnph35609_ass.Adapter.Adapter_task;
 import com.thuydev.thuyqnph35609_ass.DAO.DAO_task;
 import com.thuydev.thuyqnph35609_ass.DTO.DTO_task;
+import com.thuydev.thuyqnph35609_ass.QuanLyCongViec;
 import com.thuydev.thuyqnph35609_ass.R;
 
 import java.util.ArrayList;
@@ -29,6 +30,8 @@ public class Frag_bixoa extends Fragment {
     DTO_task dto_task;
     DAO_task dao_task;
     Adapter_task adapter_task;
+
+    QuanLyCongViec quanLyCongViec ;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -40,14 +43,15 @@ public class Frag_bixoa extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         lv_list = view.findViewById(R.id.rc_xoa);
         sv_ = view.findViewById(R.id.sv_xoa);
+        quanLyCongViec = (QuanLyCongViec) getContext();
         dao_task = new DAO_task(getContext());
         dto_task = new DTO_task();
-        list = dao_task.getData();
+        list = dao_task.getData(quanLyCongViec.Guidata().getId());
 
         LinearLayoutManager manager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         lv_list.setLayoutManager(manager);
         listCheck = loc(list);
-        adapter_task = new Adapter_task(getContext(), listCheck,-1);
+        adapter_task = new Adapter_task(getContext(), listCheck,-1,quanLyCongViec.Guidata().getId());
         lv_list.setAdapter(adapter_task);
 
         sv_.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

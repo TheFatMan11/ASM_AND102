@@ -46,6 +46,7 @@ public class Frag_all extends Fragment {
     Adapter_task adapter_task;
     Calendar lich = Calendar.getInstance();
     int ngay_check,thang_check,nam_check;
+    QuanLyCongViec quanLyCongViec ;
 
     @Nullable
     @Override
@@ -68,14 +69,15 @@ public List<DTO_task> loc(List<DTO_task> list){
         lv_list = view.findViewById(R.id.rc_all);
         sv_ = view.findViewById(R.id.sv_);
         add = view.findViewById(R.id.ibtn_add);
+        quanLyCongViec = (QuanLyCongViec) getContext();
         dao_task = new DAO_task(getContext());
         dto_task = new DTO_task();
-        list = dao_task.getData();
+        list = dao_task.getData(quanLyCongViec.Guidata().getId());
 
         LinearLayoutManager manager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         lv_list.setLayoutManager(manager);
         listCheck = loc(list);
-        adapter_task = new Adapter_task(getContext(), listCheck,5);
+        adapter_task = new Adapter_task(getContext(), listCheck,5,quanLyCongViec.Guidata().getId());
         lv_list.setAdapter(adapter_task);
 
 
@@ -176,7 +178,7 @@ sv_.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                                 Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
                             }
                             listCheck.clear();
-                            listCheck.addAll(loc(dao_task.getData()));
+                            listCheck.addAll(loc(dao_task.getData(quanLyCongViec.Guidata().getId())));
 
                             adapter_task.notifyDataSetChanged();
                         }else {
