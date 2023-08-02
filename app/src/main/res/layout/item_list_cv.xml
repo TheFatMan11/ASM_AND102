@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/shape_item_list"
     android:padding="10dp"
+    android:layout_marginBottom="10dp"
     >
 
    <LinearLayout

@@ -15,13 +15,15 @@
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             app:titleTextColor="@color/white"
-            android:background="#03A9F4"
+            android:background="#76EBE4"
             android:id="@+id/tb_"/>
+
         <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/frag_02"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:id="@+id/frag_02"/>
+            android:padding="10dp" />
     </LinearLayout>
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"

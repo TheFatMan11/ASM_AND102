@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 super.run();
                 manager.beginTransaction().add(R.id.frag_, frag_begin).commit();
                 try {
-                    sleep(3000);
+                    sleep(2000);
                     if (check == 0) {
                         manager.beginTransaction().replace(R.id.frag_, frag_dangKy).commit();
                         dao_phien.soPhien();

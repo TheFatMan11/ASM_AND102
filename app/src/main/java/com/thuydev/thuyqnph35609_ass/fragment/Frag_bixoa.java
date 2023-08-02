@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,7 +21,7 @@ import com.thuydev.thuyqnph35609_ass.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Frag_hoanthanh extends Fragment {
+public class Frag_bixoa extends Fragment {
     RecyclerView lv_list;
     List<DTO_task> list;
     List<DTO_task> listCheck;
@@ -31,14 +32,14 @@ public class Frag_hoanthanh extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.frag_cv_hoanthanh,container,false);
+        return inflater.inflate(R.layout.frag_cv_bixoa,container,false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        lv_list = view.findViewById(R.id.rc_hoanthanh);
-        sv_ = view.findViewById(R.id.sv_hoanthanh);
+        lv_list = view.findViewById(R.id.rc_xoa);
+        sv_ = view.findViewById(R.id.sv_xoa);
         dao_task = new DAO_task(getContext());
         dto_task = new DTO_task();
         list = dao_task.getData();
@@ -46,7 +47,7 @@ public class Frag_hoanthanh extends Fragment {
         LinearLayoutManager manager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         lv_list.setLayoutManager(manager);
         listCheck = loc(list);
-        adapter_task = new Adapter_task(getContext(), listCheck,2);
+        adapter_task = new Adapter_task(getContext(), listCheck,-1);
         lv_list.setAdapter(adapter_task);
 
         sv_.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -63,10 +64,11 @@ public class Frag_hoanthanh extends Fragment {
             }
         });
     }
+
     public List<DTO_task> loc(List<DTO_task> list){
         List<DTO_task> listCheck = new ArrayList<>();
         for (DTO_task task:list) {
-            if(task.getStatus()==2){
+            if(task.getStatus()==-1){
                 listCheck.add(task);
             }
         }

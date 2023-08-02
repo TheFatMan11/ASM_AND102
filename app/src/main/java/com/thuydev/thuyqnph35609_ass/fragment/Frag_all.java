@@ -27,14 +27,17 @@ import com.thuydev.thuyqnph35609_ass.Adapter.Adapter_task;
 import com.thuydev.thuyqnph35609_ass.DAO.DAO_task;
 import com.thuydev.thuyqnph35609_ass.DTO.DTO_task;
 import com.thuydev.thuyqnph35609_ass.MainActivity;
+import com.thuydev.thuyqnph35609_ass.QuanLyCongViec;
 import com.thuydev.thuyqnph35609_ass.R;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 public class Frag_all extends Fragment {
     RecyclerView lv_list;
     List<DTO_task> list;
+    List<DTO_task> listCheck;
     SearchView sv_;
     ImageButton add;
 
@@ -49,7 +52,16 @@ public class Frag_all extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.frag_quancongviec, container, false);
     }
-
+public List<DTO_task> loc(List<DTO_task> list){
+    List<DTO_task> listCheck = new ArrayList<>();
+    for (DTO_task task:list
+    ) {
+        if(task.getStatus()!=-1){
+            listCheck.add(task);
+        }
+    }
+    return listCheck;
+}
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -59,13 +71,27 @@ public class Frag_all extends Fragment {
         dao_task = new DAO_task(getContext());
         dto_task = new DTO_task();
         list = dao_task.getData();
+
         LinearLayoutManager manager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         lv_list.setLayoutManager(manager);
-        adapter_task = new Adapter_task(getContext(), list);
+        listCheck = loc(list);
+        adapter_task = new Adapter_task(getContext(), listCheck,5);
         lv_list.setAdapter(adapter_task);
 
 
+sv_.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        adapter_task.getFilter().filter(query);
+        return true;
+    }
 
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        adapter_task.getFilter().filter(newText);
+        return true;
+    }
+});
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +105,7 @@ public class Frag_all extends Fragment {
                 EditText start = view1.findViewById(R.id.edt_start);
                 EditText end = view1.findViewById(R.id.edt_end);
                 Button them = view1.findViewById(R.id.btn_add);
-                Button cancel = view1.findViewById(R.id.btn_Cance);
+
                 Dialog dialog = builder.create();
 
 
@@ -118,7 +144,12 @@ public class Frag_all extends Fragment {
                             @Override
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
+                                if(ngay_check<=dayOfMonth&&thang_check<=month&&nam_check<=year){
                                     end.setText(String.format("%d-%d-%d", dayOfMonth, month, year));
+                                    Toast.makeText(getContext(), ""+view, Toast.LENGTH_SHORT).show();
+                                }else {
+                                    Toast.makeText(getContext(), "Ngày kết thúc phải nhiều hơn ngày bắt đầu", Toast.LENGTH_SHORT).show();
+                                }
 
                             }
                         },nam,thang,ngay);
@@ -131,28 +162,29 @@ public class Frag_all extends Fragment {
                 them.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        dto_task.setName(tieuDe.getText().toString());
-                        dto_task.setConten(noiDung.getText().toString());
-                        dto_task.setStart(start.getText().toString());
-                        dto_task.setEnd(end.getText().toString());
-                        dto_task.setStatus(0);
-                        if (dao_task.AddRow(dto_task) > 0) {
-                            Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                        if(!tieuDe.getText().toString().isEmpty()&&!noiDung.getText().toString().isEmpty()&&!start.getText().toString().isEmpty()&&!end.getText().toString().isEmpty()){
+                            dto_task.setName(tieuDe.getText().toString());
+                            dto_task.setConten(noiDung.getText().toString());
+                            dto_task.setStart(start.getText().toString());
+                            dto_task.setEnd(end.getText().toString());
+                            dto_task.setStatus(0);
+                            QuanLyCongViec quanLyCongViec = (QuanLyCongViec) getContext();
+                            dto_task.setId_user(quanLyCongViec.Guidata().getId());
+                            if (dao_task.AddRow(dto_task) > 0) {
+                                Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();dialog.dismiss();
+                            } else {
+                                Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                            }
+                            listCheck.clear();
+                            listCheck.addAll(loc(dao_task.getData()));
+
+                            adapter_task.notifyDataSetChanged();
+                        }else {
+                            Toast.makeText(getContext(), "Vui lòng nhập đủ thông tin", Toast.LENGTH_SHORT).show();
                         }
-                        list.clear();
-                        list.addAll(dao_task.getData());
-                        adapter_task.notifyDataSetChanged();
-                        dialog.dismiss();
                     }
                 });
-                cancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
+
 
             }
         });

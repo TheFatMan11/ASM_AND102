@@ -22,7 +22,9 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.thuydev.thuyqnph35609_ass.DTO.DTO_user;
+import com.thuydev.thuyqnph35609_ass.fragment.Frag_Thongtin;
 import com.thuydev.thuyqnph35609_ass.fragment.Frag_all;
+import com.thuydev.thuyqnph35609_ass.fragment.Frag_bixoa;
 import com.thuydev.thuyqnph35609_ass.fragment.Frag_chuahoanthanh;
 import com.thuydev.thuyqnph35609_ass.fragment.Frag_hoanthanh;
 import com.thuydev.thuyqnph35609_ass.fragment.Frag_moi;
@@ -40,6 +42,8 @@ public class QuanLyCongViec extends AppCompatActivity {
     Frag_moi frag_moi;
     Frag_hoanthanh frag_hoanthanh;
     Frag_chuahoanthanh frag_chuahoanthanh;
+    Frag_bixoa frag_bixoa;
+    Frag_Thongtin frag_thongtin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +56,8 @@ public class QuanLyCongViec extends AppCompatActivity {
         frag_moi = new Frag_moi();
         frag_hoanthanh = new Frag_hoanthanh();
         frag_chuahoanthanh = new Frag_chuahoanthanh();
+        frag_bixoa = new Frag_bixoa();
+        frag_thongtin = new Frag_Thongtin();
         manager = getSupportFragmentManager();
 
         manager.beginTransaction().add(R.id.frag_02,frag_all).commit();
@@ -99,6 +105,7 @@ public class QuanLyCongViec extends AppCompatActivity {
                     toolbar.setTitle("Quản lý tài khoản");
                 }else if (item.getItemId() == R.id.it_vechungtoi) {
                     toolbar.setTitle("Thông tin ứng dụng");
+                    manager.beginTransaction().replace(R.id.frag_02,frag_thongtin).commit();
                 }else if (item.getItemId() == R.id.it_dangxuat) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(QuanLyCongViec.this);
                     builder.setTitle("Thông báo");
@@ -121,10 +128,16 @@ public class QuanLyCongViec extends AppCompatActivity {
                     });
                     Dialog dialog = builder.create();
                     dialog.show();
+                } else if (item.getItemId()==R.id.it_cv_bixoa) {
+                    toolbar.setTitle("Công việc bị xóa");
+                    manager.beginTransaction().replace(R.id.frag_02,frag_bixoa).commit();
                 }
                 drawerLayout.close();
                 return false;
             }
         });
+    }
+    public DTO_user Guidata(){
+        return user;
     }
 }

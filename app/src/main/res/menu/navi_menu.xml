@@ -14,8 +14,11 @@
                     android:title="Công viêc đã làm"
                     android:icon="@drawable/clipboard_ic"/>
                 <item android:id="@+id/it_cv_chualam"
-                    android:title="Công viêc chưa làm"
+                    android:title="Công viêc đang làm"
                     android:icon="@drawable/wrong"/>
+                <item android:id="@+id/it_cv_bixoa"
+                    android:title="Công viêc bị xoa"
+                    android:icon="@drawable/delete"/>
             </menu>
         </item>
     </group>

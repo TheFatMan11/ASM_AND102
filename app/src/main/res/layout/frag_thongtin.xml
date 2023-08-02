@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    >
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/logo"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thông tin ứng dụng"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:textSize="24dp"
+        android:padding="10dp"
+        android:textColor="#39A1F4"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bạn có nhiều việc phải làm mỗi ngày, nhưng không biết cách sắp xếp thời gian và ưu tiên hiệu quả? Bạn muốn theo dõi tiến độ của các dự án và nhiệm vụ của mình một cách dễ dàng và nhanh chóng? Bạn cần một ứng dụng quản lý công việc hằng ngày cho bạn. Ứng dụng này sẽ giúp bạn:\n
+- Tạo danh sách công việc và nhiệm vụ của bạn với các chi tiết, hạn chót, và mức độ quan trọng.\n\n
+- Nhắc nhở bạn về các công việc và nhiệm vụ sắp đến hoặc quá hạn.\n\n
+- Cho phép bạn chỉnh sửa, hoàn thành, hoặc xóa các công việc và nhiệm vụ một cách dễ dàng.\n\n
+- Thống kê và biểu đồ hóa hiệu suất và tiến độ của bạn theo thời gian, loại công việc, hoặc mục tiêu.\n\n
+- Đồng bộ hóa dữ liệu của bạn trên các thiết bị khác nhau và sao lưu trên đám mây.\n\n
+- Hỗ trợ nhiều ngôn ngữ và chế độ tối để bảo vệ mắt của bạn.\n\n
+- Với ứng dụng quản lý công việc hằng ngày cho bạn, bạn sẽ có thể kiểm soát được cuộc sống và công việc của mình một cách hiệu quả và thoải mái. Hãy tải ứng dụng này ngay hôm nay và khám phá những tính năng tuyệt vời của nó. Bạn sẽ không thất vọng đâu! 😊"
+
+            android:textSize="24dp"
+            android:textColor="#006A81"/>
+    </ScrollView>
+
+</LinearLayout>

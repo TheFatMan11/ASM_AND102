@@ -22,8 +22,8 @@ public class DAO_task {
 
     public long AddRow(DTO_task task){
         ContentValues values = new ContentValues();
-        values.put("id",task.getId());
         values.put("name",task.getName());
+        values.put("content",task.getConten());
         values.put("status",task.getStatus());
         values.put("start",task.getStart());
         values.put("endl",task.getEnd());
@@ -43,6 +43,7 @@ public class DAO_task {
         ContentValues values = new ContentValues();
         values.put("id",task.getId());
         values.put("name",task.getName());
+        values.put("content",task.getConten());
         values.put("status",task.getStatus());
         values.put("start",task.getStart());
         values.put("endl",task.getEnd());
