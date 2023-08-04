@@ -17,10 +17,12 @@ public class Dbhelper_ass extends SQLiteOpenHelper {
         String task = "CREATE TABLE tasks (     id      INTEGER PRIMARY KEY AUTOINCREMENT                     NOT NULL                     UNIQUE,     name    TEXT    NOT NULL,     content TEXT,     status  INTEGER NOT NULL                     DEFAULT (0),     start   TEXT    NOT NULL,     endl    TEXT    NOT NULL,     id_user INTEGER NOT NULL                     REFERENCES Users (id) )";
         String Firt = "CREATE TABLE phienChay (     solan   INTEGER PRIMARY KEY AUTOINCREMENT,     sophien INTEGER )";
         String luuDangNhap = "CREATE TABLE luuaccount (     id        INTEGER PRIMARY KEY,     username  TEXT,     pasword   TEXT,     trangthai INTEGER )";
+        String ngaysua= "CREATE TABLE tb_lichsu (     id      INTEGER PRIMARY KEY AUTOINCREMENT,     ngaysua TEXT,     id_user INTEGER REFERENCES Users (id) );";
         db.execSQL(user);
         db.execSQL(task);
         db.execSQL(Firt);
         db.execSQL(luuDangNhap);
+        db.execSQL(ngaysua);
         db.execSQL("insert into Users values(1,'thuy','thuyqnph35609@fpt.edu.vn','1','Quàng Ngọc Thủy')");
         db.execSQL("insert into phienChay values (1,0)");
         db.execSQL("insert into luuaccount values(1,'ok','ok',0)");

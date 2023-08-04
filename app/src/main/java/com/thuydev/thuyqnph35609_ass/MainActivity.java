@@ -63,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
 public Frag_quen_pass_xacthuc truyenPassXT(){
         return frag_quen_pass_xacthuc;
 }
+
+
     public Frag_quen_pass_doipass truyenPassDP(){
         return frag_quen_pass_doipass;
     }

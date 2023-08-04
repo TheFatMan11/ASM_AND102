@@ -28,6 +28,7 @@ import com.thuydev.thuyqnph35609_ass.fragment.Frag_bixoa;
 import com.thuydev.thuyqnph35609_ass.fragment.Frag_chuahoanthanh;
 import com.thuydev.thuyqnph35609_ass.fragment.Frag_hoanthanh;
 import com.thuydev.thuyqnph35609_ass.fragment.Frag_moi;
+import com.thuydev.thuyqnph35609_ass.fragment.Frag_quanlytaikhoan;
 
 public class QuanLyCongViec extends AppCompatActivity {
     Toolbar toolbar;
@@ -45,6 +46,8 @@ public class QuanLyCongViec extends AppCompatActivity {
     Frag_bixoa frag_bixoa;
     Frag_Thongtin frag_thongtin;
 
+    Frag_quanlytaikhoan frag_quanlytaikhoan;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +61,7 @@ public class QuanLyCongViec extends AppCompatActivity {
         frag_chuahoanthanh = new Frag_chuahoanthanh();
         frag_bixoa = new Frag_bixoa();
         frag_thongtin = new Frag_Thongtin();
+        frag_quanlytaikhoan = new Frag_quanlytaikhoan();
         manager = getSupportFragmentManager();
 
         manager.beginTransaction().add(R.id.frag_02,frag_all).commit();
@@ -103,6 +107,7 @@ public class QuanLyCongViec extends AppCompatActivity {
                     manager.beginTransaction().replace(R.id.frag_02,frag_chuahoanthanh).commit();
                 }else if (item.getItemId() == R.id.it_nguoidung) {
                     toolbar.setTitle("Quản lý tài khoản");
+                    manager.beginTransaction().replace(R.id.frag_02,frag_quanlytaikhoan).commit();
                 }else if (item.getItemId() == R.id.it_vechungtoi) {
                     toolbar.setTitle("Thông tin ứng dụng");
                     manager.beginTransaction().replace(R.id.frag_02,frag_thongtin).commit();
