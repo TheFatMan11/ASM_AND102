@@ -78,7 +78,7 @@ public class Frag_dangKy extends Fragment {
     }
     public void setDangKy(){
         daoUser = new DAO_user(getContext());
-        String checkEmail = "[aA0-zZ9]+@+[a-z]+.+[a-z]{2,3}";
+        String checkEmail = "[aA0-zZ9]+@+[a-z]+[.]+[a-z]{2,3}";
         if(taiKhoan.getText().toString().isEmpty()||matKhau.getText().toString().isEmpty()||reMatKhau.getText().toString().isEmpty()||email.getText().toString().isEmpty()||hoVaTen.getText().toString().isEmpty()){
             Toast.makeText(getContext(), "Không được để trống , vui lòng thử lại", Toast.LENGTH_SHORT).show();
         } else if(!email.getText().toString().matches(checkEmail)){

@@ -168,7 +168,7 @@ public class Adapter_task extends RecyclerView.Adapter<Adapter_task.ViewHolder> 
                                 DatePickerDialog datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
                                     @Override
                                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                                        start.setText(String.format("%d-%d-%d", dayOfMonth, month, year));
+                                        start.setText(String.format("%d-%d-%d", dayOfMonth, month+1, year));
                                         ngay_check = dayOfMonth;
                                         thang_check = month;
                                         nam_check = year;
@@ -193,8 +193,8 @@ public class Adapter_task extends RecyclerView.Adapter<Adapter_task.ViewHolder> 
                                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
                                         if (ngay_check <= dayOfMonth && thang_check <= month && nam_check <= year) {
-                                            end.setText(String.format("%d-%d-%d", dayOfMonth, month, year));
-                                            Toast.makeText(context, "" + view, Toast.LENGTH_SHORT).show();
+                                            end.setText(String.format("%d-%d-%d", dayOfMonth, month+1, year));
+
                                         } else {
                                             Toast.makeText(context, "Ngày kết thúc phải nhiều hơn ngày bắt đầu", Toast.LENGTH_SHORT).show();
                                         }

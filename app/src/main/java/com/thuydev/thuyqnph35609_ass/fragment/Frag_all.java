@@ -121,7 +121,7 @@ sv_.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                         DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                                start.setText(String.format("%d-%d-%d", dayOfMonth, month, year));
+                                start.setText(String.format("%d-%d-%d", dayOfMonth, month+1, year));
                                 ngay_check = dayOfMonth;
                                 thang_check = month;
                                 nam_check = year;
@@ -147,8 +147,7 @@ sv_.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
                                 if(ngay_check<=dayOfMonth&&thang_check<=month&&nam_check<=year){
-                                    end.setText(String.format("%d-%d-%d", dayOfMonth, month, year));
-                                    Toast.makeText(getContext(), ""+view, Toast.LENGTH_SHORT).show();
+                                    end.setText(String.format("%d-%d-%d", dayOfMonth, month+1, year));
                                 }else {
                                     Toast.makeText(getContext(), "Ngày kết thúc phải nhiều hơn ngày bắt đầu", Toast.LENGTH_SHORT).show();
                                 }
