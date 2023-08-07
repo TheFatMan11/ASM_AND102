@@ -154,26 +154,7 @@ public class QuanLyCongViec extends AppCompatActivity {
             }
         });
     }
-    public void thongBao(Context context) {
-        Intent intent = new Intent(context, ThongBao.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        TaskStackBuilder builder = TaskStackBuilder.create(context);
-        builder.addNextIntentWithParentStack(intent);
 
-        PendingIntent pendingIntent = builder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-
-
-        Notification notification = new NotificationCompat.Builder(context, cauhinh.ID).setSmallIcon(android.R.drawable.ic_input_add).setContentTitle("Thông báo").setContentText("Công việc đã được chuyển tới mục xóa").setContentIntent(pendingIntent).build();
-        NotificationManagerCompat compat = NotificationManagerCompat.from(context);
-
-        if (ActivityCompat.checkSelfPermission(context, android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 999);
-            return;
-        }
-        int id = (int) new Date().getTime();
-        compat.notify(id, notification);
-
-    }
     public DTO_user Guidata(){
         return user;
     }
