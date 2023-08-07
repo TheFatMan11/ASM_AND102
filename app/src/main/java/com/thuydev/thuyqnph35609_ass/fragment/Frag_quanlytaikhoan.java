@@ -30,6 +30,7 @@ import com.thuydev.thuyqnph35609_ass.QuanLyCongViec;
 import com.thuydev.thuyqnph35609_ass.R;
 
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 public class Frag_quanlytaikhoan extends Fragment {
@@ -115,6 +116,8 @@ public class Frag_quanlytaikhoan extends Fragment {
 
                 tenND.setText(user.getUsername());
                 hoTen.setText(user.getFullname());
+                pass.setText(user.getPassword());
+                rePass.setText(user.getPassword());
 
                 sua.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -145,7 +148,10 @@ public class Frag_quanlytaikhoan extends Fragment {
                                         dto_ngaysua.setId_user(user.getId());
                                         ngaysua.them(dto_ngaysua);
                                         list.clear();
+                                        Collections.reverse(list);
                                         list.addAll(ngaysua.getData(user));
+                                        fullname.setText(hoTen.getText().toString());
+                                        username.setText(tenND.getText().toString());
                                         lichsu.notifyDataSetChanged();
                                         Toast.makeText(getContext(), "Hoàn tất chỉnh sửa", Toast.LENGTH_SHORT).show();
                                         dialog1.dismiss();

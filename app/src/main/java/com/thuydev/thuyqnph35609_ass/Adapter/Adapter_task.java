@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -22,12 +24,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.thuydev.thuyqnph35609_ass.DAO.DAO_task;
 import com.thuydev.thuyqnph35609_ass.DTO.DTO_task;
 import com.thuydev.thuyqnph35609_ass.QuanLyCongViec;
 import com.thuydev.thuyqnph35609_ass.R;
+import com.thuydev.thuyqnph35609_ass.cauhinh;
 import com.thuydev.thuyqnph35609_ass.fragment.Frag_all;
 import com.thuydev.thuyqnph35609_ass.fragment.Frag_bixoa;
 import com.thuydev.thuyqnph35609_ass.fragment.Frag_chuahoanthanh;
@@ -39,6 +43,7 @@ import java.util.Calendar;
 import java.util.List;
 
 public class Adapter_task extends RecyclerView.Adapter<Adapter_task.ViewHolder> implements Filterable {
+    private static final int NOTIFYCATION_ID = 1;
     Context context;
     List<DTO_task> list;
     List<DTO_task> listOld;
@@ -56,12 +61,12 @@ public class Adapter_task extends RecyclerView.Adapter<Adapter_task.ViewHolder> 
     int idUser = 0;
 
 
-    public Adapter_task(Context context, List<DTO_task> list,int sta,int id_user) {
+    public Adapter_task(Context context, List<DTO_task> list, int sta, int id_user) {
         this.context = context;
         this.list = list;
         listOld = list;
         frag_status = sta;
-        idUser=id_user;
+        idUser = id_user;
 
     }
 
@@ -84,10 +89,11 @@ public class Adapter_task extends RecyclerView.Adapter<Adapter_task.ViewHolder> 
         frag_chuahoanthanh = new Frag_chuahoanthanh();
         frag_hoanthanh = new Frag_hoanthanh();
         frag_bixoa = new Frag_bixoa();
+        frag_moi = new Frag_moi();
         holder.status.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dto_task=list.get(position);
+                dto_task = list.get(position);
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("Trạng thái");
                 String[] st = new String[]{
@@ -130,7 +136,7 @@ public class Adapter_task extends RecyclerView.Adapter<Adapter_task.ViewHolder> 
                 Button chitiet = view.findViewById(R.id.btn_xemthem_task);
                 Dialog dialog = builder.create();
                 dialog.show();
-                if(frag_status==-1){
+                if (frag_status == -1) {
                     xoa.setVisibility(View.GONE);
                 }
 
@@ -168,7 +174,7 @@ public class Adapter_task extends RecyclerView.Adapter<Adapter_task.ViewHolder> 
                                 DatePickerDialog datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
                                     @Override
                                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                                        start.setText(String.format("%d-%d-%d", dayOfMonth, month+1, year));
+                                        start.setText(String.format("%d-%d-%d", dayOfMonth, month + 1, year));
                                         ngay_check = dayOfMonth;
                                         thang_check = month;
                                         nam_check = year;
@@ -193,7 +199,7 @@ public class Adapter_task extends RecyclerView.Adapter<Adapter_task.ViewHolder> 
                                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
                                         if (ngay_check <= dayOfMonth && thang_check <= month && nam_check <= year) {
-                                            end.setText(String.format("%d-%d-%d", dayOfMonth, month+1, year));
+                                            end.setText(String.format("%d-%d-%d", dayOfMonth, month + 1, year));
 
                                         } else {
                                             Toast.makeText(context, "Ngày kết thúc phải nhiều hơn ngày bắt đầu", Toast.LENGTH_SHORT).show();
@@ -255,10 +261,11 @@ public class Adapter_task extends RecyclerView.Adapter<Adapter_task.ViewHolder> 
                                 dto_task.setStatus(-1);
                                 if (dao_task.UpdateRow(dto_task) > 0) {
                                     Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                                    thongbao();
                                     dialog.dismiss();
 
 
-                                  checkFrag(frag_status);
+                                    checkFrag(frag_status);
                                 } else {
                                     Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
                                 }
@@ -373,27 +380,42 @@ public class Adapter_task extends RecyclerView.Adapter<Adapter_task.ViewHolder> 
         }
         return status;
     }
-    public void checkFrag(int a){
-        if(a==-1){
+
+    public void checkFrag(int a) {
+        if (a == -1) {
             list.clear();
             list.addAll(frag_bixoa.loc(dao_task.getData(idUser)));
             notifyDataSetChanged();
-        }else if(a==0){
+        } else if (a == 0) {
             list.clear();
             list.addAll(frag_moi.loc(dao_task.getData(idUser)));
             notifyDataSetChanged();
-        }else if(a==1){
+        } else if (a == 1) {
             list.clear();
             list.addAll(frag_chuahoanthanh.loc(dao_task.getData(idUser)));
             notifyDataSetChanged();
-        }else if(a==2){
+        } else if (a == 2) {
             list.clear();
             list.addAll(frag_hoanthanh.loc(dao_task.getData(idUser)));
             notifyDataSetChanged();
-        }else {
+        } else {
             list.clear();
             list.addAll(frag_all.loc(dao_task.getData(idUser)));
             notifyDataSetChanged();
         }
     }
+
+public void thongbao(){
+        Notification notification = new NotificationCompat.Builder(context,cauhinh.ID)
+                .setContentTitle("Thông báo !!")
+                .setContentText("Bạn vừa xóa một công việc")
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setColor(Color.BLUE).build();
+
+    NotificationManager manager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+    manager.notify(NOTIFYCATION_ID,notification);
 }
+
+
+}
+

@@ -5,13 +5,23 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.core.app.TaskStackBuilder;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.Dialog;
+import android.app.Notification;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -29,6 +39,8 @@ import com.thuydev.thuyqnph35609_ass.fragment.Frag_chuahoanthanh;
 import com.thuydev.thuyqnph35609_ass.fragment.Frag_hoanthanh;
 import com.thuydev.thuyqnph35609_ass.fragment.Frag_moi;
 import com.thuydev.thuyqnph35609_ass.fragment.Frag_quanlytaikhoan;
+
+import java.util.Date;
 
 public class QuanLyCongViec extends AppCompatActivity {
     Toolbar toolbar;
@@ -141,6 +153,26 @@ public class QuanLyCongViec extends AppCompatActivity {
                 return false;
             }
         });
+    }
+    public void thongBao(Context context) {
+        Intent intent = new Intent(context, ThongBao.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        TaskStackBuilder builder = TaskStackBuilder.create(context);
+        builder.addNextIntentWithParentStack(intent);
+
+        PendingIntent pendingIntent = builder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+
+        Notification notification = new NotificationCompat.Builder(context, cauhinh.ID).setSmallIcon(android.R.drawable.ic_input_add).setContentTitle("Thông báo").setContentText("Công việc đã được chuyển tới mục xóa").setContentIntent(pendingIntent).build();
+        NotificationManagerCompat compat = NotificationManagerCompat.from(context);
+
+        if (ActivityCompat.checkSelfPermission(context, android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 999);
+            return;
+        }
+        int id = (int) new Date().getTime();
+        compat.notify(id, notification);
+
     }
     public DTO_user Guidata(){
         return user;

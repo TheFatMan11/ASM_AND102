@@ -58,6 +58,7 @@
             android:layout_height="36dp"
             android:paddingLeft="10dp"
             android:id="@+id/edt_matkhau"
+            android:inputType="textPassword"
             android:background="@drawable/shape_bo_edt"
            />
 
@@ -78,6 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="36dp"
             android:paddingLeft="10dp"
+            android:inputType="textPassword"
             android:id="@+id/edt_rematkhau"
             android:background="@drawable/shape_bo_edt"
             />

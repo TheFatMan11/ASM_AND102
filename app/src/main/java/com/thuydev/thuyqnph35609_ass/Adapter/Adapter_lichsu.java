@@ -14,11 +14,13 @@ import com.thuydev.thuyqnph35609_ass.DAO.DAO_ngaysua;
 import com.thuydev.thuyqnph35609_ass.DTO.DTO_ngaysua;
 import com.thuydev.thuyqnph35609_ass.R;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Adapter_lichsu extends RecyclerView.Adapter<Adapter_lichsu.ViewHoder>{
 Context context;
     List<DTO_ngaysua> list;
+int i = 1;
 
     public Adapter_lichsu(Context context, List<DTO_ngaysua> list) {
         this.context = context;
@@ -30,6 +32,8 @@ Context context;
     public ViewHoder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = ((Activity)context).getLayoutInflater();
         View view = inflater.inflate(R.layout.item_sua,null,false);
+
+
         return new ViewHoder(view);
     }
 
