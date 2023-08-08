@@ -163,7 +163,7 @@ public class Adapter_task extends RecyclerView.Adapter<Adapter_task.ViewHolder> 
                         end.setText(dto_task.getEnd());
                         them.setText("Sửa");
 
-
+dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                         start.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -336,7 +336,7 @@ public class Adapter_task extends RecyclerView.Adapter<Adapter_task.ViewHolder> 
                     List<DTO_task> listnew = new ArrayList<>();
                     for (DTO_task task : listOld
                     ) {
-                        if (constraint.toString().toLowerCase().contains(task.getName())) {
+                        if (task.getName().toLowerCase().contains(constraint.toString())) {
                             listnew.add(task);
                         }
                     }

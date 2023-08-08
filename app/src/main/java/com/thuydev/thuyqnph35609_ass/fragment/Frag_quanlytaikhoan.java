@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -118,7 +120,7 @@ public class Frag_quanlytaikhoan extends Fragment {
                 hoTen.setText(user.getFullname());
                 pass.setText(user.getPassword());
                 rePass.setText(user.getPassword());
-
+dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 sua.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
