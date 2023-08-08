@@ -410,7 +410,7 @@ public void thongbao(){
                 .setContentTitle("Thông báo !!")
                 .setContentText("Bạn vừa xóa một công việc")
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setColor(Color.BLUE).build();
+                .setColor(Color.RED).build();
 
     NotificationManager manager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
     manager.notify(NOTIFYCATION_ID,notification);
