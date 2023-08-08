@@ -20,11 +20,13 @@ import java.util.List;
 public class Adapter_lichsu extends RecyclerView.Adapter<Adapter_lichsu.ViewHoder>{
 Context context;
     List<DTO_ngaysua> list;
+    List<DTO_ngaysua> oldlist;
 int i = 1;
 
     public Adapter_lichsu(Context context, List<DTO_ngaysua> list) {
         this.context = context;
         this.list = list;
+       Collections.reverse(list);
     }
 
     @NonNull
@@ -34,11 +36,14 @@ int i = 1;
         View view = inflater.inflate(R.layout.item_sua,null,false);
 
 
+
         return new ViewHoder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHoder holder, int position) {
+
+
 holder.ngaysua.setText("Ngày chỉnh sửa "+list.get(position).getNgaySua());
     }
 
@@ -54,4 +59,5 @@ TextView ngaysua;
             ngaysua = itemView.findViewById(R.id.tv_chinhsua);
         }
     }
+
 }

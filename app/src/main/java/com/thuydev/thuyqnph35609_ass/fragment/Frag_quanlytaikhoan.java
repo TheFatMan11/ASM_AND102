@@ -144,23 +144,26 @@ dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                                     user.setUsername(tenND.getText().toString());
                                     user.setPassword(pass.getText().toString());
                                     user.setFullname(hoTen.getText().toString());
-                                    if (daoUser.UpdateRow(user) > 0) {
-                                        DTO_ngaysua dto_ngaysua = new DTO_ngaysua();
-                                        dto_ngaysua.setNgaySua(String.format("%d/%d/%d",ngay,thang,nam));
-                                        dto_ngaysua.setId_user(user.getId());
-                                        ngaysua.them(dto_ngaysua);
-                                        list.clear();
-                                        Collections.reverse(list);
-                                        list.addAll(ngaysua.getData(user));
-                                        fullname.setText(hoTen.getText().toString());
-                                        username.setText(tenND.getText().toString());
-                                        lichsu.notifyDataSetChanged();
-                                        Toast.makeText(getContext(), "Hoàn tất chỉnh sửa", Toast.LENGTH_SHORT).show();
-                                        dialog1.dismiss();
-                                        dialog.dismiss();
-                                    } else {
-                                        Toast.makeText(getContext(), "Chỉnh sửa thất bại", Toast.LENGTH_SHORT).show();
-                                    }
+                                   try {
+                                       if (daoUser.UpdateRow(user) > 0) {
+                                           DTO_ngaysua dto_ngaysua = new DTO_ngaysua();
+                                           dto_ngaysua.setNgaySua(String.format("%d/%d/%d",ngay,thang,nam));
+                                           dto_ngaysua.setId_user(user.getId());
+                                           ngaysua.them(dto_ngaysua);
+                                           list.clear();
+                                           list.addAll(ngaysua.getData(user));
+                                           fullname.setText(hoTen.getText().toString());
+                                           username.setText(tenND.getText().toString());
+                                           lichsu.notifyDataSetChanged();
+                                           Toast.makeText(getContext(), "Hoàn tất chỉnh sửa", Toast.LENGTH_SHORT).show();
+                                           dialog1.dismiss();
+                                           dialog.dismiss();
+                                       } else {
+                                           Toast.makeText(getContext(), "Chỉnh sửa thất bại", Toast.LENGTH_SHORT).show();
+                                       }
+                                   }catch (Exception e){
+                                       Toast.makeText(getContext(), ""+e, Toast.LENGTH_SHORT).show();
+                                   }
                                 } else {
                                     Toast.makeText(getContext(), "Mật khẩu mới và mật khuẩu nhập lại không khớp nhau", Toast.LENGTH_SHORT).show();
                                 }
